@@ -1,0 +1,46 @@
+{
+  "checks": {
+    "enabled": ["secret", "debug", "todo", "dangerous", "sql-injection", "trailing"],
+    "maxPerFile": 50,
+    "customRules": [
+      {
+        "id": "no-broad-catch",
+        "severity": "warning",
+        "pattern": "catch\\s*\\(\\s*\\)",
+        "message": "空 catch 会静默吞掉错误，建议至少记录日志",
+        "extensions": [".ts", ".js", ".tsx", ".jsx"]
+      },
+      {
+        "id": "date-new-now",
+        "severity": "info",
+        "pattern": "new Date\\(\\s*\\)\\s*\\.\\s*(getFullYear|getTime)",
+        "message": "建议使用 Date.now()",
+        "flags": "i"
+      }
+    ]
+  },
+  "filter": {
+    "maxComments": 50,
+    "extensions": [".ts", ".tsx", ".js", ".jsx", ".py", ".go", ".rs", ".java", ".c", ".cpp", ".h", ".rb", ".php", ".sh"],
+    "ignorePaths": ["**/dist/**", "**/vendor/**", "**/node_modules/**", "**/package-lock.json"],
+    "minSeverity": "info",
+    "skipExisting": true
+  },
+  "lints": [],
+  "llm": {
+    "enabled": true,
+    "baseUrl": "https://api.openai.com/v1",
+    "model": "gpt-4o-mini",
+    "apiKeyEnv": "OPENAI_API_KEY",
+    "maxFindingsInPrompt": 60,
+    "models": []
+  },
+  "push": {
+    "event": "COMMENT",
+    "body": "🤖 gitreview 自动审查结果",
+    "position": false
+  },
+  "report": {
+    "format": "text"
+  }
+}

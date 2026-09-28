@@ -1,0 +1,43 @@
+{
+  "name": "gitreview",
+  "version": "0.1.0",
+  "description": "GitHub 代码审查辅助 CLI：拉取 PR 变更 -> 本地 lint/安全检查 -> LLM 生成审查评论 -> 推送回 GitHub",
+  "type": "module",
+  "bin": {
+    "gitreview": "./bin/gitreview.mjs"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "tsx src/main.ts",
+    "test": "tsx --test tests/*.test.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "demo": "tsx src/main.ts --repo tj/commander.js --pr 2624 --dry-run --no-llm",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "bin/",
+    "dist/",
+    "README.md",
+    "LICENSE",
+    "gitreview.config.json"
+  ],
+  "keywords": [
+    "code-review",
+    "github",
+    "cli",
+    "llm",
+    "pr-review"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^12.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}
